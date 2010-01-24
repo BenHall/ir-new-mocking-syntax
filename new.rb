@@ -98,5 +98,3 @@ def mock(&block)
   block.to_ruby.gsub(/[{}]/, '').gsub(/proc/, '').strip
 end
 
-z = mock {System::Web::HttpRequestBase.application_path.return("123")}
-puts z
