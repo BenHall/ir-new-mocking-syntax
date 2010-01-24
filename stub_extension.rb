@@ -24,7 +24,7 @@ module Stubber
   end
 
   def get_method(class_as_string)
-    method = class_as_string.split(' == ')[0]
+    method = class_as_string.split(' = ')[0]
     without_ending = get_method_name method
     arguments = get_arguments method
     return [without_ending, arguments]
@@ -38,7 +38,7 @@ module Stubber
 
   def get_arguments(method)
     has_arguments =  !(method =~ /\(*\)/).nil?
-    arguments = nil
+    arguments = :any
     arguments = /\((.*?)\)/.match(method)[1].intern if(has_arguments)
     arguments = :any if arguments == :*
     return arguments
@@ -84,11 +84,11 @@ class Object
 end
 
 
-s = System::Web::HttpRequestBase.stub 'application_path ==  "test"'
+s = System::Web::HttpRequestBase.stub 'application_path =  "test"'
 
 puts s
 puts s.application_path
-puts s.received?('application_path ==  "test"')
+puts s.received?('application_path =  "test"')
 
 
 
